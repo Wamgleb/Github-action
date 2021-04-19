@@ -1,0 +1,19 @@
+name: ITEA-lesson3
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      - run: docker build -t $DOCKER_USERNAME/github-action-lesson3 .
+      - run: docker push $DOCKER_USERNAME/github-action-lesson3
+
+

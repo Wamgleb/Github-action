@@ -1,0 +1,9 @@
+dist: xenial
+
+jobs:
+  include:
+    - stages: build docker images
+      script:
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - docker build -t $DOCKER_USERNAME//github-action-lesson3 .
+        - docker push $DOCKER_USERNAME//github-action-lesson3
